@@ -5,25 +5,27 @@
 ### Entities
 
 - Customer
-	- Attributes
-		- first name
-		- last name
-		- email
-		- phone number
+    - Attributes
+        - first name
+        - last name
+        - email
+        - phone number
 
 - Account
-	- Attributes
-		- account type
-		- balance
-		- opened date
+    - Attributes
+        - account type
+        - balance
+        - opened date
 
 ### Endpoints
 
 #### 1. `GET` Customer Details
+
 - Endpoint: `/customers/{customerId}`
 - Returns details of a specific customer and their accounts.
 
 #### 2. `POST` Create Customer
+
 - Endpoint: `/customers`
 - Return the created customer details.
 - JSON payload containing customer information
@@ -38,6 +40,7 @@
 ```
 
 #### 3. `PUT` Update Customer Details
+
 - Endpoint: `customers/{customerId}`
 - Return the updated customer details
 - JSON payload container updated customer information
@@ -52,6 +55,7 @@
 ```
 
 #### 4. `POST` Create Account for Customer
+
 - Endpoint: `/customers/{customerId}/accounts`
 - Return the created account details.
 - JSON payload containing account information
@@ -64,6 +68,7 @@
 ```
 
 #### 5. `PUT` Update Account Details
+
 - Endpoint: `/accounts/{accountId}`
 - Return the updated account details.
 - JSON payload containing updated account information
@@ -74,6 +79,7 @@
   "balance": 1500.00
 }
 ```
+
 ### Validations
 
 - Use appropriate HTTP status codes in responses.
