@@ -16,13 +16,19 @@ public class CustomerMapper {
         this.modelMapper = modelMapper;
     }
 
-    public CustomerDTO entityToDTO(Customer customer) {
-        modelMapper.typeMap(Customer.class, CustomerDTO.class)
-                .addMapping(c -> c.getAccount().getAccountType(), CustomerDTO::setAccountType)
-                .addMapping(c -> c.getAccount().getBalance(), CustomerDTO::setBalance)
-                .addMapping(c -> c.getAccount().getOpenedDate(), CustomerDTO::setOpenedDate);
+    public CustomerDTO toDTO(Customer customer) {
 
-        modelMapper.validate();
+        if (customer.getAccount() != null) {
+            modelMapper.typeMap(Customer.class, CustomerDTO.class)
+                    .addMapping(c -> c.getAccount().getAccountType(), CustomerDTO::setAccountType)
+                    .addMapping(c -> c.getAccount().getBalance(), CustomerDTO::setBalance)
+                    .addMapping(c -> c.getAccount().getOpenedDate(), CustomerDTO::setOpenedDate);
+        }
+
         return modelMapper.map(customer, CustomerDTO.class);
+    }
+
+    public Customer toEntity(CustomerDTO customerDTO) {
+        return modelMapper.map(customerDTO, Customer.class);
     }
 }
