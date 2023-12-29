@@ -44,13 +44,26 @@ public class CustomerService {
     }
 
     public void save(CustomerDTO customerDTO) throws Exception {
-
         if (isNotValid(customerDTO)) {
             throw new Exception("customer data was invalid");
         }
 
         customerRepository.save(customerMapper.toEntity(customerDTO));
 
+    }
+
+    public void update(Long id, CustomerDTO customerDTO) throws Exception {
+        Optional<Customer> customer = customerRepository.findCustomerById(id);
+        if (customer.isEmpty()) {
+            throw new Exception("no customer was found");
+        }
+
+        if (isNotValid(customerDTO)) {
+            throw new Exception("customer data was invalid");
+        }
+
+        customerMapper.updateToEntity(customerDTO, customer.get());
+        customerRepository.save(customer.get());
     }
 
     // Validation

@@ -31,10 +31,20 @@ public class APIController {
 
     @PostMapping()
     public ResponseEntity<?> createCustomer(@RequestBody CustomerDTO customerDTO) {
-
         try {
             customerService.save(customerDTO);
             return ResponseEntity.created(URI.create("/")).body(customerDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorDTO(e.getMessage()));
+        }
+    }
+
+    @PutMapping("{customerId}")
+    public ResponseEntity<?> updateCustomer(@PathVariable Long customerId,
+                                            @RequestBody CustomerDTO customerDTO) {
+        try {
+            customerService.update(customerId, customerDTO);
+            return ResponseEntity.ok().body(customerDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorDTO(e.getMessage()));
         }

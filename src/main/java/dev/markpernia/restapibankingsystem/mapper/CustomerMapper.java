@@ -1,8 +1,11 @@
 package dev.markpernia.restapibankingsystem.mapper;
 
 import dev.markpernia.restapibankingsystem.dto.CustomerDTO;
+import dev.markpernia.restapibankingsystem.entity.Account;
 import dev.markpernia.restapibankingsystem.entity.Customer;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +17,8 @@ public class CustomerMapper {
     @Autowired
     public CustomerMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+        this.modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     public CustomerDTO toDTO(Customer customer) {
@@ -30,5 +35,13 @@ public class CustomerMapper {
 
     public Customer toEntity(CustomerDTO customerDTO) {
         return modelMapper.map(customerDTO, Customer.class);
+    }
+
+    public void updateToEntity(CustomerDTO customerDTO, Customer customer) {
+        modelMapper.typeMap(CustomerDTO.class, Customer.class)
+                .addMappings(c -> c.skip(Customer::setId));
+
+        modelMapper.map(customerDTO, customer);
+
     }
 }
