@@ -24,7 +24,7 @@ public class CustomerService {
     }
 
     public CustomerDTO findCustomerById(Long id) throws Exception {
-        Optional<Customer> customer = customerRepository.findCustomerById(id);
+        Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isEmpty()) {
             throw new Exception("no customer was found");
         }
@@ -53,7 +53,7 @@ public class CustomerService {
     }
 
     public void update(Long id, CustomerDTO customerDTO) throws Exception {
-        Optional<Customer> customer = customerRepository.findCustomerById(id);
+        Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isEmpty()) {
             throw new Exception("no customer was found");
         }
