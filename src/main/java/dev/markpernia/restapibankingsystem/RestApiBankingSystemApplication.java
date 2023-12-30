@@ -47,7 +47,14 @@ public class RestApiBankingSystemApplication implements CommandLineRunner {
         customer.setAccount(account);
         account.setCustomer(customer);
 
+        Customer customer1 = new Customer();
+        customer1.setFirstName("jane");
+        customer1.setLastName("doe");
+        customer1.setEmail("jjd@mail.com");
+        customer1.setPhoneNumber("777-654123");
+
         customerRepository.save(customer);
+        customerRepository.save(customer1);
 
     }
 }

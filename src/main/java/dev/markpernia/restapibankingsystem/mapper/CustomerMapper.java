@@ -1,11 +1,9 @@
 package dev.markpernia.restapibankingsystem.mapper;
 
 import dev.markpernia.restapibankingsystem.dto.CustomerDTO;
-import dev.markpernia.restapibankingsystem.entity.Account;
 import dev.markpernia.restapibankingsystem.entity.Customer;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
