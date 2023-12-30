@@ -32,11 +32,11 @@ public class CustomerService {
         CustomerDTO customerDTO = customerMapper.toDTO(customer.get());
 
         if (customerDTO.getAccountType() != null) {
-            if (isNotValidWithAccount(customerDTO)) {
+            if (isInvalidWithAccount(customerDTO)) {
                 throw new Exception("customer data was invalid");
             }
         } else {
-            isNotValid(customerDTO);
+            isInvalid(customerDTO);
         }
 
         return customerDTO;
@@ -44,7 +44,7 @@ public class CustomerService {
     }
 
     public void save(CustomerDTO customerDTO) throws Exception {
-        if (isNotValid(customerDTO)) {
+        if (isInvalid(customerDTO)) {
             throw new Exception("customer data was invalid");
         }
 
@@ -58,7 +58,7 @@ public class CustomerService {
             throw new Exception("no customer was found");
         }
 
-        if (isNotValid(customerDTO)) {
+        if (isInvalid(customerDTO)) {
             throw new Exception("customer data was invalid");
         }
 
@@ -67,7 +67,7 @@ public class CustomerService {
     }
 
     // Validation
-    private boolean isNotValidWithAccount(CustomerDTO customerDTO) {
+    private boolean isInvalidWithAccount(CustomerDTO customerDTO) {
         return isNullOrEmpty(customerDTO.getFirstName()) ||
                 isNullOrEmpty(customerDTO.getLastName()) ||
                 isInvalidEmail(customerDTO.getEmail()) ||
@@ -77,7 +77,7 @@ public class CustomerService {
                 isNullOrEmpty(customerDTO.getOpenedDate());
     }
 
-    private boolean isNotValid(CustomerDTO customerDTO) {
+    private boolean isInvalid(CustomerDTO customerDTO) {
         return isNullOrEmpty(customerDTO.getFirstName()) ||
                 isNullOrEmpty(customerDTO.getLastName()) ||
                 isInvalidEmail(customerDTO.getEmail()) ||
