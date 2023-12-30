@@ -53,6 +53,20 @@ public class AccountService {
         customerRepository.save(customer.get());
     }
 
+    public void update(Long id, AccountDTO accountDTO) throws Exception {
+        Optional<Customer> customer = customerRepository.findById(id);
+        if (customer.isEmpty()) {
+            throw new Exception("no customer was found");
+        }
+
+        if (customer.get().getAccount() == null) {
+            throw new Exception("customer does not have associated account");
+        }
+
+        accountMapper.updateToEntity(accountDTO, customer.get().getAccount());
+        accountRepository.save(customer.get().getAccount());
+    }
+
     private boolean isInvalid(AccountDTO accountDTO) {
         return isNullOrEmpty(accountDTO.getAccountType()) ||
                 accountDTO.getBalance() == null;

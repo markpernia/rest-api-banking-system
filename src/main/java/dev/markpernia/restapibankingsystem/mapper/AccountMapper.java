@@ -19,4 +19,11 @@ public class AccountMapper {
     public Account toEntity(AccountDTO accountDTO) {
         return modelMapper.map(accountDTO, Account.class);
     }
+
+    public void updateToEntity(AccountDTO accountDTO, Account account) {
+        modelMapper.typeMap(AccountDTO.class, Account.class)
+                .addMappings(a -> a.skip(Account::setId));
+
+        modelMapper.map(accountDTO, account);
+    }
 }

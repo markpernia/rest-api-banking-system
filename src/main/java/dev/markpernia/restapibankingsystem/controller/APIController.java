@@ -67,4 +67,15 @@ public class APIController {
         }
     }
 
+    @PutMapping("/accounts/{customerId}")
+    public ResponseEntity<?> updateAccount(@PathVariable Long customerId,
+                                           @RequestBody AccountDTO accountDTO) {
+        try {
+            accountService.update(customerId, accountDTO);
+            return ResponseEntity.ok().body(accountDTO);
+        }  catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorDTO(e.getMessage()));
+        }
+    }
+
 }
